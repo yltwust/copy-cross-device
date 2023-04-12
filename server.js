@@ -12,6 +12,18 @@ const FILE_PATH = path.resolve('/tmp', 'clipboard.txt');
 app.use(cors());
 app.use(express.json());
 
+let deleteTimer;
+
+function deleteTempFile() {
+    fs.unlink(TEMP_FILE, (err) => {
+        if (err) {
+            console.log('Error deleting temporary file:', err);
+        } else {
+            console.log('Temporary file deleted.');
+        }
+    });
+}
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -26,6 +38,11 @@ app.post('/save', [body('content').custom((value) => isBase64(value))], (req, re
     const content = req.body.content;
     fs.writeFileSync(FILE_PATH, content);
     res.status(200).send('Content saved');
+
+    if (deleteTimer) {
+        clearTimeout(deleteTimer);
+    }
+    deleteTimer = setTimeout(deleteTempFile, 60 * 1000);
 });
 
 app.get('/load', (req, res) => {
