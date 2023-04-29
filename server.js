@@ -15,7 +15,7 @@ app.use(express.json());
 let deleteTimer;
 
 function deleteTempFile() {
-    fs.unlink(TEMP_FILE, (err) => {
+    fs.unlink(FILE_PATH, (err) => {
         if (err) {
             console.log('Error deleting temporary file:', err);
         } else {
