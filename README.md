@@ -12,5 +12,5 @@ docker buildx build --load --platform linux/arm64 -t yltstc/copy-cross-device:ar
 
 run:
 ```shell
-docker run -v /tmp/:/tmp/ -p 3000:3000 yltstc/copy-cross-device:arm-latest
+docker run --name copy-cross-device -e SERVER_URL="http://example.com" -v /tmp/:/tmp/ -p 13000:3000 yltstc/copy-cross-device:arm-latest
 ```

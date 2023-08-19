@@ -23,6 +23,10 @@ function deleteTempFile() {
         }
     });
 }
+app.get('/config.js', (req, res) => {
+    res.type('application/javascript');
+    res.send(`const SERVER_URL = "${process.env.SERVER_URL || 'http://localhost:3000'}";`);
+});
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));

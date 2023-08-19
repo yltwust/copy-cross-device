@@ -67,11 +67,11 @@
     <button id="load-btn">复制</button>
 </div>
 <div id="toast" class="toast"></div>
+<script src="/config.js"></script>
 <script>
     const clipboard = document.getElementById('clipboard');
     const saveBtn = document.getElementById('save-btn');
     const loadBtn = document.getElementById('load-btn');
-    const SERVER_URL="http://localhost:3000"
     function showToast(message) {
         toast.textContent = message;
         toast.style.display = 'block';
